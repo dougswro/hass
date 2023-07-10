@@ -1,0 +1,34 @@
+---
+hello_world:
+  module: hello
+  class: HelloWorld
+light_automation:
+  tree_christmas_tree_lights:
+    module: light_automation
+    class: light_automation
+    entity_id:
+      - light.christmas_tree
+    on_time: "13:55:00"
+    off_time: "21:30:00"
+    # constraint:
+    #   - binary_sensor.workday_tomorrow,off
+    #   - input_boolean.party_mode,on
+    #   - group.presence,off
+white_noise:
+  module: whitenoise
+  class: WhiteNoise
+  media_player: bedroom
+  input_boolean: white_noise
+  filename: https://roccoshouse.duckdns.org/local/pink.mp3
+######################################################################
+Garage_Motion_Lights:
+  module: motion_lights
+  class: motion_lights
+  # constrain_end_time: sunrise
+  constrain_input_boolean: input_boolean.night_outside_motion
+  constrain_start_time: sunset
+  delay: "1500"
+  dependencies: globals
+  # entity_off: switch.garage_light_switch
+  entity_on: switch.garage_light_switch
+  sensor: binary_sensor.garage_motion_sensor_occupancy

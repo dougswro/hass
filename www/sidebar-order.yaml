@@ -1,0 +1,35 @@
+title: Homes ASS
+order:
+  - item: map
+    hide: true
+  - item: Energy
+    hide: true
+  - item: energy
+    hide: true
+  - item: Overview
+  - item: Editor
+  - item: AdGuard Home
+  - item: HACS
+  - item: Zigbee2mqtt
+  - item: Calendar
+    bottom: true
+  - item: Media
+  - item: phpMyAdmin
+  - item: Shopping List
+  - item: Logbook
+    bottom: true
+  - item: Backups
+  - new_item: true
+    item: TEST CUSTOM
+    icon: mdi:heart-broken-outline
+    href: /config/mqtt?config_entry=63d1347c096570d957bc141425027340
+  - item: Developer Tools
+    bottom: true
+  - item: Settings
+    bottom: true
+  - item: Studio Code Server
+    bottom: true
+  - item: terminal
+    bottom: true
+exceptions:
+  base_order: true

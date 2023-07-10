@@ -1,0 +1,48 @@
+esphome:
+  name: r
+  friendly_name: r
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "wxWX5DAHmWKqrzFg4OYpl/WYutQo52LhJ/3gQJdsHNw="
+
+ota:
+  password: "62f8f96beab12b76661ef29590ec0146"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "R Fallback Hotspot"
+    password: "ni5i31jZ34Fy"
+
+captive_portal:
+
+switch:
+  - platform: gpio
+    pin: GPIO2
+    name: "Builtin LED"
+    id: "LEDbuiltin"
+
+dallas:
+  - pin: GPIO14
+
+#sensor:
+#  - platform: dallas
+#    index: 0
+#    name: "Temp Test"
+#    id: "Temp01"
+#    device_class: "temperature"
+#    state_class: "measurement"
+#    accuracy_decimals: 1

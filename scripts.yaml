@@ -1,0 +1,171 @@
+garage_door_notify:
+  alias: Garage door notify
+  sequence:
+  - service: notify.telegram
+    data:
+      message: Garage door Left Open too long
+      title: GARAGE DOOR ALERT
+  mode: single
+  icon: mdi:bell-circle
+roomba_clean:
+  alias: Roomba Clean All
+  sequence:
+  - service: vacuum.start
+    data: {}
+    target:
+      entity_id: vacuum.vacuum
+  mode: single
+  icon: mdi:robot-vacuum
+clean_bedroom:
+  alias: Clean_bedroom
+  sequence:
+  - service: vacuum.send_command
+    data:
+      command: setSpeed
+      params:
+        speed: 2
+    target:
+      entity_id: vacuum.vacuum
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.vacuum
+    data:
+      command: spot_area
+      params:
+        rooms: 2
+        cleanings: 1
+  - wait_for_trigger:
+    - platform: device
+      device_id: dcfdc67d9f67bf0e72376ead39609b84
+      domain: vacuum
+      entity_id: vacuum.vacuum
+      type: docked
+  - service: script.vacuum_empty_dustbin
+    data: {}
+  mode: single
+  icon: mdi:bed
+clean_livingroom:
+  alias: Clean_Livingroom
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.vacuum
+    data:
+      command: spot_area
+      params:
+        rooms: 12
+        cleanings: 1
+  mode: single
+  icon: fas:couch
+clean_kitchen:
+  alias: Clean_Kitchen
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.vacuum
+    data:
+      command: spot_area
+      params:
+        rooms: 0
+        cleanings: 1
+  mode: single
+  icon: mdi:countertop-outline
+vacuum_empty_dustbin:
+  alias: Vacuum_empty_dustbin
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.vacuum
+    data:
+      command: setAutoEmpty
+      params:
+        act: start
+  mode: single
+  icon: mdi:robot-industrial-outline
+clean_ryans:
+  alias: Clean_ryans
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.vacuum
+    data:
+      command: spot_area
+      params:
+        rooms: 9, 10, 8
+        cleanings: 1
+  mode: single
+  icon: mdi:bed
+clean_common_areas:
+  alias: Clean_common_areas
+  sequence:
+  - if:
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: person.ryan
+        state: Away
+    then:
+    - service: vacuum.set_fan_speed
+      data:
+        fan_speed: Quite
+      target:
+        entity_id: vacuum.vacuum
+    else:
+    - service: vacuum.set_fan_speed
+      data:
+        fan_speed: Max
+      target:
+        entity_id: vacuum.vacuum
+  - service: vacuum.send_command
+    data:
+      command: Spot_clean
+      params:
+        rooms: 0, 12, 13, 1, 6, 7
+        cleanings: 1
+    target:
+      entity_id: vacuum.vacuum
+  mode: single
+  icon: mdi:robot-vacuum
+'1662621427470':
+  alias: Confirmable Notification
+  use_blueprint:
+    path: homeassistant/confirmable_notification.yaml
+    input:
+      notify_device: 98eed63a443fe69eff5335e0dd88dfcf
+      title: ACTION NEEDED
+      message: do it?
+      confirm_action:
+      - service: media_player.play_media
+        target:
+          entity_id: media_player.google_home
+        data:
+          media_content_id: media-source://media_source/local/Plex/Music/B.E.R/The
+            Night Begins to Shine/1-01 - The Night Begins to Shine.mp3
+          media_content_type: audio/mpeg
+        metadata:
+          title: 1-01 - The Night Begins to Shine.mp3
+          thumbnail:
+          media_class: music
+          children_media_class:
+          navigateIds:
+          - {}
+          - media_content_type: app
+            media_content_id: media-source://media_source
+          - media_content_type: ''
+            media_content_id: media-source://media_source/local/Plex
+          - media_content_type: ''
+            media_content_id: media-source://media_source/local/Plex/Music
+          - media_content_type: ''
+            media_content_id: media-source://media_source/local/Plex/Music/B.E.R
+          - media_content_type: ''
+            media_content_id: media-source://media_source/local/Plex/Music/B.E.R/The
+              Night Begins to Shine
+vacuum_dock:
+  alias: Vacuum_dock
+  sequence:
+  - service: vacuum.return_to_base
+    data: {}
+    target:
+      entity_id: vacuum.vacuum
+  mode: single
+  icon: mdi:pause

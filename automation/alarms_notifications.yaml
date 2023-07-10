@@ -1,0 +1,36 @@
+- id: "1662587639556"
+  alias: Door alarm
+  description: individual doors try
+  trigger:
+    - type: opened
+      platform: device
+      device_id: 187e227dfe4ad6bcc872d479ee692da0
+      entity_id: binary_sensor.bedroom_door_dougs_poarch_contact
+      domain: binary_sensor
+    - type: opened
+      platform: device
+      device_id: 7084570e6de6b26555c38a7a69834171
+      entity_id: binary_sensor.garage_door_garage_contact
+      domain: binary_sensor
+    - type: opened
+      platform: device
+      device_id: e3e1e08a946a1b285746f6ec0d4f32ca
+      entity_id: binary_sensor.kitchen_door_back_contact
+      domain: binary_sensor
+    - type: opened
+      platform: device
+      device_id: eaf70685dda6764ac44665aeb5fff746
+      entity_id: binary_sensor.living_room_door_front_contact
+      domain: binary_sensor
+  condition:
+    - condition: not
+      conditions:
+        - condition: zone
+          entity_id: person.doug
+          zone: zone.home_real
+  action:
+    - service: notify.telegram
+      data:
+        title: "\U0001F6A8###  ALARM  ###\U0001F6A8"
+        message: A door was opened and you werent there
+  mode: single

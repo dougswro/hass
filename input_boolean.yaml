@@ -1,0 +1,26 @@
+christmas_time:
+  name: christmas time
+  icon: mdi:tree-outline
+haloween:
+  name: haloween
+  icon: mdi:halloween
+vacuum_mop_on:
+  name: Vacuum Mop Attached
+white_noise:
+  name: white_noise
+doug_home:
+  name: Doug at Home
+ryan_home:
+  name: Ryan at home
+vacation_mode:
+  name: Vacation Time
+humidifier_or_dehumidifier:
+  name: Humidify or De-that
+doug_work:
+  name: Doug at Work
+mop_automate:
+  name: Automate Mop?
+rocco_alone:
+  name: Is Rocco Alone?
+ikea_remote_toggle:
+  name: Ikea Remote Options

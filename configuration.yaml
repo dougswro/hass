@@ -1,0 +1,261 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+homeassistant:
+  unit_system: imperial
+  temperature_unit: F
+  name: Home
+  time_zone: "America/New_York"
+#  customize: !include customize.yaml
+  external_url: !secret external-url
+#  internal_url: https://192.168.1.23:8123
+  auth_providers:
+ #   - type: trusted_networks
+ #     trusted_networks:
+ #       - 192.168.1.0/24
+  #      - 172.27.66.0/24
+    #    - 172.27.66.0/32
+      # - 0.0.0.0/0
+  #    allow_bypass_login: true
+    - type: homeassistant
+  packages: !include_dir_merge_named packages/
+http:
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+    #ip_ban_enabled: true
+    #login_attempts_threshold: 10
+#  use_x_forwarded_for: true
+#  trusted_proxies:
+#    - 172.30.33.0/24
+
+#recorder:
+#  db_url: !secret mariadb_url
+
+
+#####################################################
+#                                                   #
+#               Included other files                #
+#                                                   #
+#####################################################
+scene: !include scenes.yaml
+script: !include scripts.yaml
+script split: !include_dir_merge_list script/
+sensor: !include sensors.yaml
+automation: !include automations.yaml
+automation split: !include_dir_merge_list automation/
+binary_sensor: !include binary_sensor.yaml
+#mqtt: !include mqtt.yaml
+input_boolean: !include input_boolean.yaml
+#group: group.yaml
+#schedule: !include schedule.yaml
+####################################################
+#                                                  #
+#             Lovelace/CustomUpdater               #
+#                                                  #
+####################################################
+#https://www.home-assistant.io/lovelace/yaml-mode/
+frontend:
+  themes: !include_dir_merge_named themes #https://hacs.xyz/docs/theaming
+  extra_module_url:
+    - /hacsfiles/custom-sidebar/custom-sidebar.js
+# lovelace_gen:
+####################################################
+#                                                  #
+#                HACS                              #
+#                                                  #
+####################################################
+hacs:
+  sidepanel_title: HACS
+  sidepanel_icon: "mdi:alpha-c-box"
+  experimental: true
+  release_limit: 1
+  appdaemon: true
+  netdaemon: true
+  token: !secret hacs_tocken
+
+####################################################
+#                                                  #
+#                     random                       #
+#                                                  #
+####################################################
+#python_script:
+  # https://www.home-assistant.io/integrations/python_script
+  # https://github.com/home-assistant/core/blob/dev/homeassistant/components/python_script/__init__.py
+  # https://github.com/custom-components/pyscript
+#debugpy:
+  # https://www.home-assistant.io/integrations/debugpy
+#  host: localhost
+#  port: 6789
+#  start: false
+# webhook_service:
+mobile_app:
+config:
+config_editor:
+#https://github.com/htmltiger/config-editor-card  type: custom:config-editor-card
+websocket_api:
+
+####################################################
+#                                                  #
+#             Notify                               #
+#                                                  #
+####################################################
+telegram_bot:
+  - platform: polling
+    api_key: 6363023877:AAFK86LIdL63VoYiH-jMfEqA5FZ7FHhgVcU
+    allowed_chat_ids: 6225460471
+notify:
+  - platform: telegram
+    name: doug
+    chat_id: 6225460471
+  - platform: html5
+    name: html5
+    vapid_pub_key: !secret vapid_pub_key
+    vapid_prv_key: !secret vapid_prv_key
+    vapid_email: !secret doug-email
+
+####################################################
+#plex:
+#  host: !secret external-url
+#  port: 32400
+#  token: !secret plex_token
+#  verify_ssl: false
+#  ssl: true
+## https://github.com/maykar/plex_assistant#advanced-configuration
+
+#almond:
+#  type: oauth2
+#  client_id: !secret almond_client
+#  client_secret: !secret almond_secret
+#https://www.home-assistant.io/integrations/almond
+# ^^ to convert to all local
+# Text to speech
+#tts:
+  #- platform: edge_tts
+  #  service_name: xiaomo_say # service: tts.xiaomo_say
+  #  language: zh-CN-XiaoxiaoNeural
+  #  volume: 100.0
+#  - platform: google_translate
+#    cache: true
+ #   cache_dir: /tmp/tts
+ #   time_memory: 500
+  #  service_name: google_say
+
+####################################################
+#                                                  #
+#                    Media Players                 #
+#                                                  #
+####################################################
+# media_player:
+#   - platform: samsungtv_tizen
+#     name: "Samsung Living Room Tizen"
+#     mac: 80:47:86:cf:c7:28
+#     host: 192.168.1.110
+#api_key: !secret samsung_api
+# device_id: !secret samsung_deviceid
+#update_method: smartthings
+#  source_list: '{
+#   "HDMI 1": "ST_HDMI1",
+#  "HDMI 2": "ST_HDMI2",
+#  "HDMI 3": "ST_HDMI3",
+#   "Ambiant": "KEY_AMBIENT",
+# # "Prime Video": "3201512006785",
+#    }'
+# app_list: '{
+#  "YouTube": "111299001912",
+# "Netflix": "11101200001",
+# "Plex": "3201512006963",
+#   "Internet": "org.tizen.browser",
+#  }'
+#    https://github.com/jaruba/ha-samsungtv-tizen
+####################################################
+#                                                  #
+#                 Google Assistant                 #
+#                    & Calendar                    #
+####################################################
+
+#google_assistant:
+#  project_id: homeassistant-3f1d4
+#  service_account: !include SERVICE_ACCOUNT.json
+#  report_state: true
+#  expose_by_default: true
+  # exposed_domains:
+  #   - switch
+  #   - light
+#google_assistant: !include google_assistant.yaml
+# cloud:
+#   google_actions:
+#     filter:
+#       include_entities:
+#         - light.kitchen
+#         - light.kitchen_left
+#       include_domains:
+#         - switch
+#       exclude_entities:
+#         - switch.outside
+#     entity_config:
+#       switch.kitchen:
+#         name: Custom Name for Google Assistant
+#         aliases:
+#           - bright lights
+#           - entry lights
+#         room: living room
+# #######  ------- Google Calendar
+# google:
+#   client_id: !secret gcal_client_id
+#   client_secret: !secret gcal_client_secret
+##########№#####------------------------
+#deepstack:  ##object detection
+# mqtt:
+#   broker: 127.0.0.1
+#   port: 1883
+#   discovery: true
+#   client_id: home-assistant-1
+#   username: !secret mqtt_username
+#   password: !secret mqtt_password
+
+# THis needs a sonos dev account. can send audio to speakers
+# sonos_cloud:
+#   client_id: <YOUR_APP_KEY>
+#   client_secret: <YOUR_APP_SECRET>
+
+###################################################################################3
+#### ---------- Raspberry Pi cover GPIO togel --------- ###########
+# Basic configuration.yaml entry
+# cover:
+#   - platform: rpi_gpio
+#     covers:
+#       - relay_pin: 10
+#         state_pin: 11
+
+# # Full configuration.yaml entry
+# cover:
+#   - platform: rpi_gpio
+#     relay_time: 0.2
+#     invert_relay: false
+#     state_pull_mode: "UP"
+#     invert_state: true
+#     covers:
+#       - relay_pin: 10
+#         state_pin: 11
+#       - relay_pin: 12
+#         state_pin: 13
+#         name: "Right door"
+#         unique_id: "right_door_cover_port_13"
+###
+# The rpi_gpio cover platform allows you to use a Raspberry Pi to control your cover such as Garage doors.
+# It uses two pins on the Raspberry Pi.
+#     The state_pin will detect if the cover is closed, and
+#     the relay_pin will trigger the cover to open or close.
+# Full configuration.yaml entry
+# switch:
+#   - platform: rpi_gpio
+#     switches:
+#       - port: 11
+#         name: "Fan Office"
+#         unique_id: "fan_office_switch_port_11"
+#       - port: 12
+#         name: "Light Desk"
+#         unique_id: "light_desk_switch_port_12"
+#         invert_logic: true
+...
+

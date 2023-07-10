@@ -1,0 +1,76 @@
+- id: "1653433541678"
+  alias: Clean Bedroom
+  description: ""
+  trigger:
+    - platform: time
+      at: 05:00:01
+  condition:
+    - condition: state
+      entity_id: person.doug
+      state: not_home
+  action:
+    - service: script.clean_bedroom
+      data: {}
+  mode: single
+- id: "1652015837945"
+  alias: Start vaccum
+  description: ""
+  trigger:
+    - platform: time
+      at: "16:00:00"
+  condition: []
+  action:
+    - service: script.turn_on
+      data: {}
+      target:
+        entity_id: script.roomba_clean
+    - service: notify.telegram
+      data:
+        message: Vacuum started with daily automation
+      enabled: false
+  mode: single
+- id: "1653434095650"
+  alias: Clean Ryan's room
+  description: ""
+  trigger:
+    - platform: time
+      at: 09:00:01
+  condition:
+    - condition: state
+      entity_id: person.ryan
+      state: not_home
+      for:
+        hours: 0
+        minutes: 15
+        seconds: 0
+  action:
+    - service: script.clean_ryans
+      data: {}
+  mode: single
+- id: "1653434189539"
+  alias: Clean common area
+  description: ""
+  trigger:
+    - platform: time
+      at: "11:00:00"
+  condition:
+    - condition: state
+      entity_id: person.ryan
+      state: not_home
+      enabled: false
+  action:
+    - service: script.clean_common_areas
+      data: {}
+  mode: single
+- id: "1668729633791"
+  alias: Vacuum empty
+  description: Script call
+  trigger:
+    - platform: state
+      entity_id:
+        - input_button.vacuum_empty
+  condition: []
+  action:
+    - service: script.vacuum_empty_dustbin
+      data: {}
+  mode: single

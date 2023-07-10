@@ -1,0 +1,42 @@
+# - id: "1654017513233"
+#   alias: Climate Too Cold
+#   description: ""
+#   trigger:
+#     - platform: state
+#       entity_id:
+#         - binary_sensor.climate_too_cold
+#       attribute: position
+#       for:
+#         hours: 0
+#         minutes: 5
+#         seconds: 0
+#       from: Below
+#   condition: []
+#   action:
+#     - service: notify.telegram
+#       data:
+#         message:
+#           It's too damn cold on the house . And you haven't seen up the HVAC
+#           automation
+#         title: TEMP ALERT
+#   mode: single
+# - id: "1654017326246"
+#   alias: Climate Too hot
+#   description: ""
+#   trigger:
+#     - platform: state
+#       entity_id:
+#         - binary_sensor.climate_too_hot
+#       attribute: position
+#       from: Above
+#       for:
+#         hours: 0
+#         minutes: 5
+#         seconds: 0
+#   condition: []
+#   action:
+#     - service: notify.telegram
+#       data:
+#         message: It's too damn hot on the house . And you haven't seen up the HVAC automation
+#         title: TEMP ALERT
+#   mode: single

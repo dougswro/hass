@@ -1,0 +1,18 @@
+- id: '1662581014762'
+  alias: Garage Door NFC
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 'Garage Door Toggle '
+  condition:
+  - condition: zone
+    entity_id: person.doug
+    zone: zone.home_real
+  action:
+  - service: cover.toggle
+    data: {}
+    target:
+      entity_id:
+      - cover.garage_door_msg100_main_channel
+      - cover.garage_door_msg100_main_channel
+  mode: single

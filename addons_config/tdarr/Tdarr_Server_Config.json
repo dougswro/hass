@@ -1,0 +1,8 @@
+{
+  "serverPort": "8266",
+  "webUIPort": "8265",
+  "serverIP": "127.0.0.1",
+  "handbrakePath": "",
+  "ffmpegPath": "",
+  "logLevel": "INFO"
+}

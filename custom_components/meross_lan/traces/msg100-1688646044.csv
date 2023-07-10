@@ -1,0 +1,24 @@
+2023/07/06 - 08:10:44		auto	GETACK	Appliance.System.All	{"system": {"hardware": {"type": "msg100", "subType": "us", "version": "3.5.0", "chipType": "mt7682", "uuid": "###############################0", "macAddress": "################0"}, "firmware": {"version": "3.2.5", "compileTime": "2021/09/16 13:47:36 GMT +08:00", "encrypt": 1, "wifiMac": "################0", "innerIp": "###########0", "server": "###########0", "port": "@0", "userId": "@0"}, "time": {"timestamp": 1688645414, "timezone": "", "timeRule": []}, "online": {"status": 1}}, "digest": {"togglex": [{"channel": 0, "onoff": 1, "lmTime": 0}], "triggerx": [], "timerx": [], "garageDoor": [{"channel": 0, "open": 0, "lmTime": 1688645367}]}}
+2023/07/06 - 08:10:44		auto	GETACK	Appliance.System.Ability	{"Appliance.Config.Key": {}, "Appliance.Config.WifiList": {}, "Appliance.Config.Wifi": {}, "Appliance.Config.WifiX": {}, "Appliance.Config.Trace": {}, "Appliance.System.All": {}, "Appliance.System.Hardware": {}, "Appliance.System.Firmware": {}, "Appliance.System.Debug": {}, "Appliance.System.Online": {}, "Appliance.System.Time": {}, "Appliance.System.Clock": {}, "Appliance.System.Ability": {}, "Appliance.System.Runtime": {}, "Appliance.System.Report": {}, "Appliance.System.Position": {}, "Appliance.System.DNDMode": {}, "Appliance.Control.Multiple": {"maxCmdNum": 5}, "Appliance.Control.ToggleX": {}, "Appliance.Control.TimerX": {"sunOffsetSupport": 1, "notify": ["Appliance.GarageDoor.State"]}, "Appliance.Control.TriggerX": {"notify": ["Appliance.GarageDoor.State"]}, "Appliance.Control.Bind": {}, "Appliance.Control.Unbind": {}, "Appliance.Control.Upgrade": {}, "Appliance.GarageDoor.State": {}, "Appliance.GarageDoor.Config": {}, "Appliance.Digest.TriggerX": {}, "Appliance.Digest.TimerX": {}}
+2023/07/06 - 08:10:44	TX	http	GET	Appliance.System.Runtime	{"runtime": {}}
+2023/07/06 - 08:10:44	RX	http	GETACK	Appliance.System.Runtime	{"runtime": {"signal": 100}}
+2023/07/06 - 08:10:44		auto	LOG	DEBUG	polling start
+2023/07/06 - 08:10:44	TX	http	GET	Appliance.System.Debug	{"debug": {}}
+2023/07/06 - 08:10:44	RX	http	GETACK	Appliance.System.Debug	{"debug": {"system": {"version": "3.2.5", "sysUpTime": "0h4m51s", "localTimeOffset": 0, "localTime": "Thu Jul  6 12:10:44 2023", "suncalc": "6:1;18:8"}, "network": {"linkStatus": "connected", "signal": 100, "ssid": "NETGEAR15-2.4", "gatewayMac": "34:98:b5:a8:f7:6d", "innerIp": "###########0", "wifiDisconnectCount": 0}, "cloud": {"activeServer": "192.168.1.23", "mainServer": "192.168.1.23", "mainPort": 2001, "secondServer": "###########0", "secondPort": "@0", "userId": "@0", "sysConnectTime": "Thu Jul  6 12:06:12 2023", "sysOnlineTime": "0h4m32s", "sysDisconnectCount": 0}}}
+2023/07/06 - 08:10:44	TX	http	GET	Appliance.System.All	{"all": {}}
+2023/07/06 - 08:10:44	RX	http	GETACK	Appliance.System.All	{"all": {"system": {"hardware": {"type": "msg100", "subType": "us", "version": "3.5.0", "chipType": "mt7682", "uuid": "###############################0", "macAddress": "################0"}, "firmware": {"version": "3.2.5", "compileTime": "2021/09/16 13:47:36 GMT +08:00", "encrypt": 1, "wifiMac": "################0", "innerIp": "###########0", "server": "###########0", "port": "@0", "userId": "@0"}, "time": {"timestamp": 1688645444, "timezone": "", "timeRule": []}, "online": {"status": 1}}, "digest": {"togglex": [{"channel": 0, "onoff": 1, "lmTime": 0}], "triggerx": [], "timerx": [], "garageDoor": [{"channel": 0, "open": 0, "lmTime": 1688645367}]}}}
+2023/07/06 - 08:10:44	TX	http	GET	Appliance.System.DNDMode	{"DNDMode": {}}
+2023/07/06 - 08:10:44	RX	http	GETACK	Appliance.System.DNDMode	{"DNDMode": {"mode": 0}}
+2023/07/06 - 08:10:44	TX	http	GET	Appliance.GarageDoor.Config	{"config": {}}
+2023/07/06 - 08:10:44	RX	http	GETACK	Appliance.GarageDoor.Config	{"config": {"signalDuration": 2000, "buzzerEnable": 1}}
+2023/07/06 - 08:10:44		auto	LOG	DEBUG	polling end
+2023/07/06 - 08:10:46	TX	http	GET	Appliance.System.Position	{"position": {}}
+2023/07/06 - 08:10:46	RX	http	GETACK	Appliance.System.Position	{"position": {"longitude": 0, "latitude": 0}}
+2023/07/06 - 08:10:46		auto	LOG	DEBUG	handler undefined for method:(GETACK) namespace:(Appliance.System.Position) payload:({'position': {'longitude': 0, 'latitude': 0}})
+2023/07/06 - 08:10:48	TX	http	GET	Appliance.Control.ToggleX	{"togglex": []}
+2023/07/06 - 08:10:48	RX	http	GETACK	Appliance.Control.ToggleX	{"channel": 0, "togglex": {"channel": 0, "onoff": 1, "lmTime": 0}}
+2023/07/06 - 08:10:50	TX	http	GET	Appliance.GarageDoor.State	{"state": {}}
+2023/07/06 - 08:10:50	RX	http	GETACK	Appliance.GarageDoor.State	{"state": {"channel": 0, "open": 0, "lmTime": 1688645367}}
+2023/07/06 - 08:10:52	TX	http	GET	Appliance.GarageDoor.Config	{"config": {}}
+2023/07/06 - 08:10:52	RX	http	GETACK	Appliance.GarageDoor.Config	{"config": {"signalDuration": 2000, "buzzerEnable": 1}}
+2023/07/06 - 08:11:04		auto	LOG	DEBUG	switching protocol to mqtt

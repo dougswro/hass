@@ -1,0 +1,155 @@
+- id: "1667891866904"
+  alias: Ikea - Right Hold - Strip 100
+  description: Turn desk light strip to %100 on IKEA right button HOLD
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/Portable/IKEA_Remote/action
+      payload: arrow_right_hold
+  condition: []
+  action:
+    - service: light.turn_on
+      data:
+        brightness_pct: 94
+      target:
+        device_id: 6e84e2d6c3d3a89396cb02ac25291307
+  mode: single
+- id: "1667892171021"
+  alias: Ikea - Left Hold - Space Heater OFF
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/Portable/IKEA_Remote/action
+      payload: arrow_left_hold
+  condition: []
+  action:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.space_heater_5
+  mode: single
+- id: "540224953138452875233834"
+  alias: "Ikea - Center - Overhead Light Toggle "
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/Portable/IKEA_Remote/action
+      payload: toggle
+  condition: []
+  action:
+    - service: light.toggle
+      data: {}
+      target:
+        entity_id: light.ceiling_light
+- id: "1657745779360"
+  alias: Ikea - Up - Toggle Bedroom fan
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/Portable/IKEA_Remote/action
+      payload: brightness_up_click
+  condition: []
+  action:
+    - service: fan.toggle
+      data: {}
+      target:
+        entity_id: fan.ceiling_light
+  mode: single
+- id: "54049253433842252875283004"
+  alias: "Ikea - Left Click- Space heater toggle "
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/Portable/IKEA_Remote/action
+      payload: arrow_left_click
+  condition: []
+  action:
+    - service: switch.toggle
+      data: {}
+      target:
+        entity_id: switch.space_heater_5
+    - delay:
+        hours: 0
+        minutes: 45
+        seconds: 0
+        milliseconds: 0
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.space_heater_5
+- id: "54049253433842252232875283004"
+  alias: Ikea - Right Press - Light strip to 50
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/Portable/IKEA_Remote/action
+      payload: arrow_right_click
+  action:
+    - service: light.turn_on
+      data:
+        brightness_pct: 50
+      target:
+        device_id: 6e84e2d6c3d3a89396cb02ac25291307
+- id: "5404953824528752834"
+  alias: Ikea - Down - Bedroom Lights off + Strip at %2
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/Portable/IKEA_Remote/action
+      payload: brightness_down_click
+  condition: []
+  action:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.desk_lights
+      enabled: false
+    - service: light.turn_off
+      data: {}
+      target:
+        entity_id: light.wiz_rgbw_tunable_d2efa4
+    - type: turn_off
+      device_id: 654fba82397bdf0a892671057e0ea04c
+      entity_id: light.bathroom_vanity_dimmer_switch
+      domain: light
+    - service: light.turn_on
+      data:
+        brightness_pct: 2
+      target:
+        device_id: 6e84e2d6c3d3a89396cb02ac25291307
+
+##########################################################
+#
+#
+#          Sonoff Small Switches                         #
+#
+#
+##########################################################
+- id: "1668075191011"
+  alias: Sonoff2 - Toggle Heater - Single
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/switch/sonoff_2/action
+      payload: single
+  condition: []
+  action:
+    - service: switch.toggle
+      data: {}
+      target:
+        entity_id: switch.space_heater_5
+  mode: single
+- id: "1668075389507"
+  alias: Sonoff2 - Double Press - NO TARGET
+  description: NEEDS JOB
+  trigger:
+    - platform: mqtt
+      topic: zigbee2mqtt/switch/sonoff_2/action
+      payload: single
+  condition: []
+  action:
+    - service: switch.toggle
+      data: {}
+      target:
+        entity_id: switch.space_heater_5
+      enabled: false
+  mode: single

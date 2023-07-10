@@ -1,0 +1,104 @@
+homeassistant: true
+permit_join: true
+mqtt:
+  server: mqtt://core-mosquitto:1883
+  user: addons
+  password: aith6Ievu8zeeh4Oe1Eeca9ahquiecei9aepi8wugahqu6eethooR0deasohJ9te
+serial:
+  port: /dev/ttyUSB0
+  adapter: auto
+  disable_led: true
+frontend:
+  port: 8099
+advanced:
+  homeassistant_legacy_entity_attributes: false
+  legacy_api: false
+  legacy_availability_payload: false
+  network_key:
+    - 241
+    - 149
+    - 100
+    - 231
+    - 231
+    - 45
+    - 192
+    - 77
+    - 150
+    - 176
+    - 71
+    - 154
+    - 148
+    - 108
+    - 90
+    - 177
+  log_syslog:
+    app_name: Zigbee2MQTT
+    eol: /n
+    host: localhost
+    localhost: localhost
+    path: /dev/log
+    pid: process.pid
+    port: 514
+    protocol: udp4
+    type: '5424'
+  output: attribute_and_json
+device_options:
+  legacy: false
+devices:
+  '0x00124b002513bba7':
+    friendly_name: Game Room Switch
+    description: For all game systems
+  '0x00158d0007ee059a':
+    friendly_name: Bedroom Thermometer
+    description: Master Bedroom
+  '0x282c02bfffe7ada4':
+    friendly_name: Closet Door
+    description: Master Bedroom Closet Door Contact Sensor
+  '0x282c02bfffe76987':
+    friendly_name: Poarch Door Dougs
+    description: Door to poarch in Doug's room
+  '0x847127fffe38c4fc':
+    friendly_name: Bathroom DImmer
+    description: master bath vanity dimmer
+  '0x00124b002269d88b':
+    friendly_name: Kitchen Switch
+    description: Near the Vacuum
+  '0x00158d0007ee0412':
+    friendly_name: '0x00158d0007ee0412'
+  '0x00124b0022ed3fe9':
+    friendly_name: Living Room Lamp
+    description: Switch for living room lamp
+  '0x00158d0007ebc03e':
+    friendly_name: '0x00158d0007ebc03e'
+  '0x282c02bfffe77487':
+    friendly_name: Living Room Motion
+  '0x282c02bfffe764a7':
+    friendly_name: Back Door
+    description: Back door contact sensor
+  '0x84fd27fffea5ad4f':
+    friendly_name: Garage light
+    description: Garage main lights
+  '0x282c02bfffe79970':
+    friendly_name: Garage Door
+  '0x00158d0007ef12f6':
+    friendly_name: Master Bath Leak Detector
+  '0x5c0272fffeac3949':
+    friendly_name: Portable/IKEA_Remote
+    filtered_attributes:
+      - toggle
+    homeassistant: {}
+    legacy: false
+    optimistic: true
+  '0x282c02bfffe797e8':
+    friendly_name: Front Door
+    description: Front door contact sensor
+  '0x00124b00254400fd':
+    friendly_name: '0x00124b00254400fd'
+  '0x00124b0025394f84':
+    friendly_name: '0x00124b0025394f84'
+  '0xb0ce18140364186f':
+    friendly_name: Bedroom_Light_Strip
+    description: Above deal. Sengled
+ota:
+  ikea_ota_use_test_url: true
+groups: {}

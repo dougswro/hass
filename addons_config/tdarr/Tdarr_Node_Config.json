@@ -1,0 +1,16 @@
+{
+  "nodeID": "MyInternalNode",
+  "serverIP": "127.0.0.1",
+  "serverPort": "8266",
+  "handbrakePath": "",
+  "ffmpegPath": "",
+  "mkvpropeditPath": "",
+  "pathTranslators": [
+    {
+      "server": "",
+      "node": ""
+    }
+  ],
+  "platform_arch": "linux_arm64_docker_true",
+  "logLevel": "INFO"
+}

@@ -1,0 +1,20 @@
+project_id: homeassistant-3f1d4
+service_account: !include SERVICE_ACCOUNT.JSON
+report_state: true
+client_id: !secret gcal_client_id
+client_secret: !secret gcal_client_secret
+exposed_domains:
+  - light
+  - switch
+  - group
+  - scene
+  - script
+  - cover
+  - fan
+  - media_player
+  - climate
+  - vacuum
+  - sensor
+  - input_select
+  - input_boolen
+expose_by_defalut: true

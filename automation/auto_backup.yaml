@@ -1,0 +1,49 @@
+###   https://jcwillox.github.io/hass-auto-backup/advanced-examples/
+#########  Try generational backups
+
+- alias: "Notify Backup Failure"
+  trigger:
+    platform: event
+    event_type: auto_backup.backup_failed
+  action:
+    service: persistent_notification.create
+    data:
+      title: "Backup Failed."
+      message: |-
+        Name: {{ trigger.event.data.name }}
+        Error: {{ trigger.event.data.error }}
+- alias: "AutoBackup: Daily Backup"
+  trigger:
+    platform: time
+    at: "02:30:00"
+  condition:
+    condition: time
+    weekday:
+      - tue
+      - wed
+      - thu
+      - fri
+      - sat
+      - sun
+  action:
+    - service: auto_backup.backup_full
+      data:
+        name: "DailyBackup: {{ now().strftime('%A, %B %-d, %Y') }}"
+        # addons:
+        #   - almond
+        #   - Glances
+        #   - mosquitto broker
+        #   - core_mariadb
+        # folders:
+        #   - homeassistant
+        #   - Share
+        #   - ssl
+        #   - Local add-ons
+        keep_days: 7
+        download_path: /media/Plex/auto_backups/full_backups
+        exclude:
+          addons:
+            # - Portainer
+          folders:
+            # - Local add-ons
+            # - share

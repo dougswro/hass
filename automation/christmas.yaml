@@ -1,0 +1,36 @@
+- id: "1668925744529"
+  alias: Christmas
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.christmas_tree_timer
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: input_boolean.christmas_time
+      state: "on"
+  action:
+    - service: switch.turn_on
+      data: {}
+      target:
+        entity_id: switch.christmas_tree
+  mode: single
+- id: "1668925744729"
+  alias: Christmas off
+  description: ""
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.christmas_tree_timer
+      to: "off"
+  condition:
+    - condition: state
+      entity_id: input_boolean.christmas_time
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.christmas_tree
+  mode: single

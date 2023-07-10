@@ -1,0 +1,40 @@
+---
+secrets: /config/secrets.yaml
+appdaemon:
+  latitude: 35.0471
+  longitude: 82.0901
+  elevation: 500
+  time_zone: America/New_York
+  production_mode: true
+  plugins:
+    HASS:
+      type: hass
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIyMzdkOTkyY2MwNmI0YWEwODE3ZTE3NzI1ZjY4YjY2MCIsImlhdCI6MTY2OTk4Nzk2NiwiZXhwIjoxOTg1MzQ3OTY2fQ.B9_qHeDEVNbkQQ0EB9fmlGGfBZbveeCJOaTZ7ldCOW4
+      api_port: 80
+      ha_url: https://roccoshouse.duckdns.org:8123
+      persist_entities: true
+      cert_verify: false
+    MQTT:
+      type: mqtt
+      namespace: mqtt
+      verbose: True
+      client_host: 192.168.1.168
+      client_port: 1883
+      client_id: appdaemon-user
+      client_user: appdaemon-user
+      client_password: D0ugSt0g!!!
+      ca_cert: ca_cert
+      tls_version: auto
+      # client_cert: mycert
+      # client_key: mykey
+      verify_cert: false
+      force_start: false
+      event_name: appdameon_MQTT
+      # client_topics:
+      # - zigbee2mqtt/#
+http:
+  url: http://192.168.1.168:5050
+admin:
+api:
+hadashboard:
+  dashboard_dir: /config/appdaemon/dashboards/

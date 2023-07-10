@@ -1,0 +1,24 @@
+---
+  # https://github.com/nickneos/Bring-Back-group.all_x
+binary_sensor:
+  - name: "All_Doors"
+    device_class: opening
+    entities:
+      - binary_sensor.0x282c02bfffe79970_contact
+      - binary_sensor.0x282c02bfffe764a7_contact
+      - binary_sensor.door_front_contact
+      - binary_sensor.0x282c02bfffe76987_contact
+  - name: "All_Water_Leak"
+    entities:
+      - binary_sensor.0x00158d0007ef11a7_water_leak
+      - binary_sensor.0x00158d0007ef12f6_water_leak
+      - binary_sensor.0x00158d0007efcd95_water_leak
+climate:
+  name: "All_Thermometers"
+  entities:
+    - sensor.0x00158d0007ee059a_temperature
+    - sensor.0x00158d0007ee0412_temperature
+    - sensor.0x00158d0007ebc03e_temperature
+    - sensor.0x00158d0007ef7c19_temperature
+
+...

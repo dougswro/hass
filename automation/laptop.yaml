@@ -1,0 +1,45 @@
+- id: "1663004519099"
+  alias: Laptop Heater Toggle
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: laptop/control/heater
+      payload: toggle
+  #    value_templet: '{{ value_json.state }}'
+  condition: []
+  action:
+    - service: switch.toggle
+      data: {}
+      target:
+        entity_id: switch.space_heater_5
+  mode: single
+- id: "1663004519111"
+  alias: Laptop Heater On
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: laptop/control/heater
+      payload: "on"
+      # value_template: "{{ value_json.state }}"
+  condition: []
+  action:
+    - service: switch.turn_on
+      data: {}
+      target:
+        entity_id: switch.space_heater_5
+  mode: single
+- id: "1663004519222"
+  alias: Laptop Heater Off
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: laptop/control/heater
+      payload: "off"
+      # value_templet: "{{ value_json.state }}"
+  condition: []
+  action:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.space_heater_5
+  mode: single

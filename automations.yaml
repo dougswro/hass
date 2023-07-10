@@ -1,0 +1,159 @@
+- id: '1653434433927'
+  alias: Lights on for rocco
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-1'
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: person.ryan
+      state: home
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 1
+  action:
+  - type: turn_on
+    device_id: 8eb79bf6f5347c0a184d9a893c0e47b0
+    entity_id: switch.living_room_lamp_switch
+    domain: switch
+  - if:
+    - condition: state
+      entity_id: person.doug
+      state: not_home
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 1
+    then:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.bedroom_sleep_mode
+      metadata: {}
+    else:
+    - stop: ''
+  mode: single
+- id: '1654022820760'
+  alias: Doug night
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 'Bedroom Ambient '
+  condition: []
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.bedroom_sleep_mode
+    metadata: {}
+  mode: single
+- id: '1663004387800'
+  alias: 'Garage Light Auto Shutoff '
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.garage_light_switch
+    to: 'on'
+  - platform: mqtt
+    topic: zigbee2mqtt/Garage/Light_Switch
+    payload: 'ON'
+    value_template: '{{ value_json.state }}'
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 25
+      seconds: 0
+      milliseconds: 0
+    enabled: true
+  - repeat:
+      while:
+      - type: is_motion
+        condition: device
+        device_id: e0c7e5a2558ab784a92873b1af3d37ef
+        entity_id: binary_sensor.garage_motion_sensor_occupancy
+        domain: binary_sensor
+      sequence:
+      - delay:
+          hours: 0
+          minutes: 15
+          seconds: 0
+          milliseconds: 0
+  - type: turn_off
+    device_id: 7ddcceee63959befd9eabeca530fe123
+    entity_id: switch.garage_light_switch
+    domain: switch
+  mode: single
+- id: '1663004519067'
+  alias: Garage Light Motion Control
+  description: Turn on garage light to motion
+  trigger:
+  - type: motion
+    platform: device
+    device_id: e0c7e5a2558ab784a92873b1af3d37ef
+    entity_id: binary_sensor.garage_motion_sensor_occupancy
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 7ddcceee63959befd9eabeca530fe123
+    entity_id: switch.garage_light_switch
+    domain: switch
+  mode: single
+- id: '1688920855729'
+  alias: Closet light off
+  description: ''
+  trigger:
+  - type: not_opened
+    platform: device
+    device_id: 5700fea073d56872419f6709ddf36df0
+    entity_id: 3b7b47eb2a02541a27ae96689b021577
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: light.turn_off
+    data: {}
+    target:
+      device_id: 333551caecc9627e7b7056cc5571742d
+  mode: single
+- id: '1688920922681'
+  alias: Closet light on
+  description: ''
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 5700fea073d56872419f6709ddf36df0
+    entity_id: 3b7b47eb2a02541a27ae96689b021577
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      color_temp: 380
+      brightness: 198
+    target:
+      device_id: 333551caecc9627e7b7056cc5571742d
+  mode: single
+- id: '1688921647582'
+  alias: Door open alert test
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.poarch_door_dougs_contact
+    from:
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+  condition: []
+  action:
+  - service: notify.mobile_app_pixel_7_ds
+    data:
+      message: BACK DOOR OPEN
+      title: Alarm
+  mode: single

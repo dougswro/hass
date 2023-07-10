@@ -1,0 +1,139 @@
+- id: '1662138775614'
+  alias: Closet door Closed
+  description: Close closet, turn off closet Light
+  trigger:
+  - type: not_opened
+    platform: device
+    device_id: 198473f09b960299c183085363d66740
+    entity_id: binary_sensor.bedroom_door_closet_doug_contact
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_off
+    device_id: a09e69deb64a42d8ef9f1a7984f23744
+    entity_id: light.wiz_rgbw_tunable_d2efa4
+    domain: light
+  mode: single
+- id: '1662138830739'
+  alias: Closet Door Opened
+  description: ''
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 198473f09b960299c183085363d66740
+    entity_id: binary_sensor.bedroom_door_closet_doug_contact
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      brightness_pct: 18
+    target:
+      entity_id: light.wiz_rgbw_tunable_d2efa4
+  mode: single
+- id: '1653434433927'
+  alias: Lights on for rocco
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-1'
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: person.ryan
+      state: home
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 1
+  action:
+  - type: turn_on
+    device_id: 8eb79bf6f5347c0a184d9a893c0e47b0
+    entity_id: switch.living_room_lamp_switch
+    domain: switch
+  - if:
+    - condition: state
+      entity_id: person.doug
+      state: not_home
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 1
+    then:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.bedroom_sleep_mode
+      metadata: {}
+    else:
+    - stop: ''
+  mode: single
+- id: '1654022820760'
+  alias: Doug night
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 'Bedroom Ambient '
+  condition: []
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.bedroom_sleep_mode
+    metadata: {}
+  mode: single
+- id: '1663004387800'
+  alias: 'Garage Light Auto Shutoff '
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.garage_light_switch
+    to: 'on'
+  - platform: mqtt
+    topic: zigbee2mqtt/Garage/Light_Switch
+    payload: 'ON'
+    value_template: '{{ value_json.state }}'
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 25
+      seconds: 0
+      milliseconds: 0
+    enabled: true
+  - repeat:
+      while:
+      - type: is_motion
+        condition: device
+        device_id: e0c7e5a2558ab784a92873b1af3d37ef
+        entity_id: binary_sensor.garage_motion_sensor_occupancy
+        domain: binary_sensor
+      sequence:
+      - delay:
+          hours: 0
+          minutes: 15
+          seconds: 0
+          milliseconds: 0
+  - type: turn_off
+    device_id: 7ddcceee63959befd9eabeca530fe123
+    entity_id: switch.garage_light_switch
+    domain: switch
+  mode: single
+- id: '1663004519067'
+  alias: Garage Light Motion Control
+  description: Turn on garage light to motion
+  trigger:
+  - type: motion
+    platform: device
+    device_id: e0c7e5a2558ab784a92873b1af3d37ef
+    entity_id: binary_sensor.garage_motion_sensor_occupancy
+    domain: binary_sensor
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 7ddcceee63959befd9eabeca530fe123
+    entity_id: switch.garage_light_switch
+    domain: switch
+  mode: single
+

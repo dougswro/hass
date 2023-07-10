@@ -1,0 +1,10 @@
+water_leak_notify:
+  sequence:
+  - service: notify.telegram
+    data:
+      message: You left a door open
+      title: DOOR OPEN ALERT
+  mode: single
+  icon: mdi:bell-circle
+  alias: Door Open Notify
+
