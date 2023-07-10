@@ -69,3 +69,4 @@ blueprints/
 html5_push_registrations.conf
 zigbee2mqtt/log/
 zigbee2mqtt/state.json
+.HA_VERSION
