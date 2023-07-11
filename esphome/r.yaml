@@ -36,13 +36,13 @@ switch:
     id: "LEDbuiltin"
 
 dallas:
-  - pin: GPIO14
+  - pin: GPIO32
 
-#sensor:
-#  - platform: dallas
-#    index: 0
-#    name: "Temp Test"
-#    id: "Temp01"
-#    device_class: "temperature"
-#    state_class: "measurement"
-#    accuracy_decimals: 1
+sensor:
+  - platform: dallas
+    index: 0
+    name: "Temp Test"
+    id: "Temp01"
+    device_class: "temperature"
+    state_class: "measurement"
+    accuracy_decimals: 1

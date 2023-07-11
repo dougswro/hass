@@ -99,6 +99,11 @@ devices:
   '0xb0ce18140364186f':
     friendly_name: Bedroom_Light_Strip
     description: Above deal. Sengled
+  '0x00124b002513c2f1':
+    friendly_name: '0x00124b002513c2f1'
+    description: |-
+      SZ - 4
+      dehumidifier
 ota:
   ikea_ota_use_test_url: true
 groups: {}
