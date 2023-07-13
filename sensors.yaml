@@ -31,3 +31,15 @@
 
     # Enable SSL/TLS for the host.
 - platform: websocket_api
+- platform: pirateweather
+  api_key: T1Nc6W2xe2b1wBMQ
+  scan_interval: '01:00:00'
+  monitored_conditions:
+    - temperature
+    - precip_probability
+    - precip_type
+    - humidity
+    - cloud_cover
+    - nearest_storm_distance
+    - precip_intensity
+    - wind_speed

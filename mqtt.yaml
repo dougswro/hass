@@ -1,4 +1,4 @@
-# sensor:
-#   - name: IKEA_Remote_Button_Press
-#     state_topic: "zigbee2mqtt/Portable/IKEA_Remote"
-#     value_template: "{{value_json.action}}"
+---
+
+
+...

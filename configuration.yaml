@@ -6,7 +6,7 @@ homeassistant:
   temperature_unit: F
   name: Home
   time_zone: "America/New_York"
-#  customize: !include customize.yaml
+  customize: !include customize.yaml
   external_url: !secret external-url
 #  internal_url: https://192.168.1.23:8123
   auth_providers:
@@ -44,10 +44,10 @@ sensor: !include sensors.yaml
 automation: !include automations.yaml
 automation split: !include_dir_merge_list automation/
 binary_sensor: !include binary_sensor.yaml
-#mqtt: !include mqtt.yaml
+mqtt: !include mqtt.yaml
 input_boolean: !include input_boolean.yaml
-#group: group.yaml
-#schedule: !include schedule.yaml
+group: !include group.yaml
+schedule: !include schedule.yaml
 ####################################################
 #                                                  #
 #             Lovelace/CustomUpdater               #
@@ -87,7 +87,7 @@ hacs:
 #  host: localhost
 #  port: 6789
 #  start: false
-# webhook_service:
+webhook_service:
 mobile_app:
 config:
 config_editor:
@@ -101,17 +101,31 @@ websocket_api:
 ####################################################
 telegram_bot:
   - platform: polling
-    api_key: 6363023877:AAFK86LIdL63VoYiH-jMfEqA5FZ7FHhgVcU
-    allowed_chat_ids: 6225460471
+    api_key: !secret telegram_api_key
+    allowed_chat_ids: !secret telegram_chatid
 notify:
   - platform: telegram
     name: doug
-    chat_id: 6225460471
+    chat_id: !secret telegram_chatid
   - platform: html5
     name: html5
     vapid_pub_key: !secret vapid_pub_key
     vapid_prv_key: !secret vapid_prv_key
     vapid_email: !secret doug-email
+
+####################################################
+#                                                  #
+#                Weather                           #
+#                                                  #
+####################################################
+weather:
+  - platform: pirateweather
+    api_key: !secret pirate_weather_api_key
+    # Additional optional values:
+    latitude: !secret lat
+    longitude: !secret long
+    mode: "hourly" 
+    name: "Inman Weather"
 
 ####################################################
 #plex:

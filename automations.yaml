@@ -157,3 +157,38 @@
       message: BACK DOOR OPEN
       title: Alarm
   mode: single
+- id: '1689249774131'
+  alias: Z2M - IKEA five button remote for lights and actions
+  description: ''
+  use_blueprint:
+    path: starbuck93/zigbee2mqtt-ikea-five-button-remote.yaml
+    input:
+      remote: sensor.portable_ikea_remote_action
+      light:
+        device_id: 474ab69ade3aff4e4e5e007feb79cc7f
+      button_left_short:
+      - service: light.toggle
+        data: {}
+        target:
+          device_id: 03e3906529d41c05829a43cb333e4051
+      button_left_long:
+      - service: switch.toggle
+        data: {}
+        target:
+          device_id: d5f822eb71382d6b8d0937c7e349359d
+      button_right_short:
+      - service: fan.toggle
+        data: {}
+        target:
+          device_id: 474ab69ade3aff4e4e5e007feb79cc7f
+- id: '1689249966639'
+  alias: Low battery level detection & notification for all battery sensors
+  description: ''
+  use_blueprint:
+    path: Sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      threshold: 15
+      actions:
+      - service: notify.doug
+        data:
+          message: 'Low Batteries:  {{sensors}}'

@@ -92,18 +92,16 @@ devices:
   '0x282c02bfffe797e8':
     friendly_name: Front Door
     description: Front door contact sensor
-  '0x00124b00254400fd':
-    friendly_name: '0x00124b00254400fd'
-  '0x00124b0025394f84':
-    friendly_name: '0x00124b0025394f84'
   '0xb0ce18140364186f':
     friendly_name: Bedroom_Light_Strip
     description: Above deal. Sengled
   '0x00124b002513c2f1':
-    friendly_name: '0x00124b002513c2f1'
+    friendly_name: Dehumidifier
     description: |-
       SZ - 4
       dehumidifier
+  '0x00124b0025394f84':
+    friendly_name: '0x00124b0025394f84'
 ota:
   ikea_ota_use_test_url: true
 groups: {}

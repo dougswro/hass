@@ -169,3 +169,16 @@ vacuum_dock:
       entity_id: vacuum.vacuum
   mode: single
   icon: mdi:pause
+sprinklers_full_run:
+  alias: Sprinklers Full Run
+  sequence:
+  - type: turn_on
+    device_id: cf453f19cf78e9d1c28fd8f2a5aec816
+    entity_id: b2e1aad2340a523d02b784ad0155b3be
+    domain: switch
+  - service: telegram_bot.send_message
+    data:
+      message: 'Sprinklers Started '
+      disable_notification: true
+  mode: single
+  icon: mdi:sprinkler-variant

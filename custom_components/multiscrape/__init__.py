@@ -1,5 +1,6 @@
 """The multiscrape component."""
 import asyncio
+import contextlib
 import logging
 import os
 from datetime import timedelta
@@ -24,9 +25,10 @@ from homeassistant.const import Platform
 from homeassistant.const import SERVICE_RELOAD
 from homeassistant.core import HomeAssistant
 from homeassistant.core import ServiceCall
+from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers import discovery
-from homeassistant.helpers.entity_component import EntityComponent
 from homeassistant.helpers.httpx_client import get_async_client
+from homeassistant.helpers.reload import async_integration_yaml_config
 from homeassistant.helpers.reload import async_reload_integration_platforms
 from homeassistant.helpers.service import async_set_service_schema
 from homeassistant.util import slugify
@@ -41,6 +43,7 @@ from .const import CONF_FORM_SUBMIT
 from .const import CONF_FORM_SUBMIT_ONCE
 from .const import CONF_LOG_RESPONSE
 from .const import CONF_PARSER
+from .const import CONF_SEPARATOR
 from .const import COORDINATOR
 from .const import DOMAIN
 from .const import PLATFORM_IDX
@@ -53,6 +56,7 @@ from .form import FormSubmitter
 from .http import HttpWrapper
 from .schema import CONFIG_SCHEMA  # noqa: F401
 from .scraper import Scraper
+from .util import create_dict_renderer
 from .util import create_renderer
 
 _LOGGER = logging.getLogger(__name__)
@@ -64,12 +68,13 @@ PLATFORMS = [Platform.SENSOR, Platform.BINARY_SENSOR, Platform.BUTTON]
 async def async_setup(hass: HomeAssistant, entry: ConfigEntry):
     """Set up the multiscrape platforms."""
     _LOGGER.debug("# Start loading multiscrape")
-    component = EntityComponent(_LOGGER, DOMAIN, hass)
     _async_setup_shared_data(hass)
 
     async def reload_service_handler(service):
         """Remove all user-defined groups and load new ones from config."""
-        conf = await component.async_prepare_reload()
+        conf = None
+        with contextlib.suppress(HomeAssistantError):
+            conf = await async_integration_yaml_config(hass, DOMAIN)
         if conf is None:
             return
         await async_reload_integration_platforms(hass, DOMAIN, PLATFORMS)
@@ -200,7 +205,7 @@ async def _register_services(hass, target_name, coordinator):
         CONF_DESCRIPTION: f"Triggers an update for the multiscrape {target_name} integration, independent of the update interval.",
         CONF_FIELDS: {},
     }
-    async_set_service_schema(hass, DOMAIN, target_name, service_desc)
+    async_set_service_schema(hass, DOMAIN, f"trigger_{target_name}", service_desc)
 
 
 async def async_get_config_and_coordinator(hass, platform_domain, discovery_info):
@@ -209,8 +214,6 @@ async def async_get_config_and_coordinator(hass, platform_domain, discovery_info
     conf = hass.data[DOMAIN][platform_domain][discovery_info[PLATFORM_IDX]]
     coordinator = shared_data[COORDINATOR]
     scraper = shared_data[SCRAPER]
-    if not scraper.has_data:
-        await coordinator.async_request_refresh()
     return conf, coordinator, scraper
 
 
@@ -230,7 +233,7 @@ def _create_scrape_http_wrapper(config_name, config, hass, file_manager):
         client,
         file_manager,
         timeout,
-        params=params,
+        params_renderer=create_dict_renderer(hass, params),
         request_headers=headers,
     )
     if username and password:
@@ -251,7 +254,7 @@ def _create_form_submit_http_wrapper(config_name, config, hass, file_manager):
         client,
         file_manager,
         timeout,
-        params=params,
+        params_renderer=create_dict_renderer(hass, params),
         request_headers=headers,
     )
     return http
@@ -313,10 +316,12 @@ def _create_multiscrape_coordinator(
 def _create_scraper(config_name, config, hass, file_manager):
     _LOGGER.debug("%s # Initializing scraper", config_name)
     parser = config.get(CONF_PARSER)
+    separator = config.get(CONF_SEPARATOR)
 
     return Scraper(
         config_name,
         hass,
         file_manager,
         parser,
+        separator,
     )

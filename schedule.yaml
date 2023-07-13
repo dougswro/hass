@@ -1,41 +1,42 @@
+---
 # Example configuration.yaml entry
 
-Christmas_schedule:
-  name: "Christmas schedule"
-  icon: mdi:PineTreeBox 
-  monday:
-    - from: "00:00:00"
-      to: "02:00:00"
-    - from: "16:45:00"
-      to: "23:59:59"
-  tuesday:
-    - from: "00:00:00"
-      to: "02:00:00"
-    - from: "16:45:00"
-      to: "23:59:59"
-  wednesday:
-    - from: "00:00:00"
-      to: "02:00:00"
-    - from: "16:45:00"
-      to: "23:59:59"
-  thursday:
-    - from: "00:00:00"
-      to: "02:00:00"
-    - from: "16:45:00"
-      to: "23:59:59"
-  friday:
-    - from: "00:00:00"
-      to: "02:00:00"
-    - from: "16:45:00"
-      to: "23:59:59"
-  saturday:
-    - from: "00:00:00"
-      to: "02:00:00"
-    - from: "16:45:00"
-      to: "23:59:59"
-  sunday:
-    - from: "00:00:00"
-      to: "02:00:00"
-    - from: "16:45:00"
-      to: "23:59:59"
-      
+#Christmas_schedule:
+#  name: "Christmas schedule"
+#  icon: mdi:PineTreeBox 
+#  monday:
+#    - from: "00:00:00"
+#      to: "02:00:00"
+#    - from: "16:45:00"
+#      to: "23:59:59"
+#  tuesday:
+##    - from: "00:00:00"
+ #     to: "02:00:00"
+ #   - from: "16:45:00"
+ #     to: "23:59:59"
+ # wednesday:
+#    - from: "00:00:00"
+#      to: "02:00:00"
+#    - from: "16:45:00"
+#      to: "23:59:59"
+#  thursday:
+#    - from: "00:00:00"
+#      to: "02:00:00"
+#    - from: "16:45:00"
+##      to: "23:59:59"
+ # friday:
+##    - from: "00:00:00"
+ #     to: "02:00:00"
+ #   - from: "16:45:00"
+ ##     to: "23:59:59"
+#  saturday:
+#    - from: "00:00:00"
+#      to: "02:00:00"
+#    - from: "16:45:00"
+#      to: "23:59:59"
+#  sunday:
+##    - from: "00:00:00"
+ #     to: "02:00:00"
+ #   - from: "16:45:00"
+ #     to: "23:59:59"
+...

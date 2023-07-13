@@ -1,0 +1,65 @@
+esphome:
+  name: sprinklers
+  friendly_name: Sprinklers
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+ota:
+  password: "df750669d083b085b93614a417d4c2af"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Sprinklers Fallback Hotspot"
+    password: "lhSIyxdTOEkp"
+
+captive_portal:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "GlCBSjvG7rFe+XD3HuSRM9JB+j7+ElHpBidOKAQlxks="
+
+sprinkler:
+  - id: lawn_sprinkler_ctrlr
+    main_switch: "Lawn Sprinklers"
+    auto_advance_switch: "Lawn Sprinklers Auto Advance"
+    reverse_switch: "Lawn Sprinklers Reverse"
+    multiplier_number:  
+      id: controller_multiplier_number
+      name: "Lawn Sprinkler Multiplier"
+    repeat_number: "Lawn Sprinkler Repeat"
+    valve_overlap: 5s
+    valves:
+      - valve_switch: "Front Lawn"
+        enable_switch: "Enable Front Lawn"
+        run_duration: 900s
+        valve_switch_id: lawn_sprinkler_valve_sw0
+      - valve_switch: "Side Lawn"
+        enable_switch: "Enable Side Lawn"
+        run_duration: 900s
+        valve_switch_id: lawn_sprinkler_valve_sw1
+      - valve_switch: "Back Lawn"
+        enable_switch: "Enable Back Lawn"
+        run_duration: 15s
+        valve_switch_id: lawn_sprinkler_valve_sw2
+
+switch:
+  - platform: gpio
+    id: lawn_sprinkler_valve_sw0
+    pin: 0
+  - platform: gpio
+    id: lawn_sprinkler_valve_sw1
+    pin: 2
+  - platform: gpio
+    id: lawn_sprinkler_valve_sw2
+    pin: 4
